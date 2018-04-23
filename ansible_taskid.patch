@@ -1,0 +1,20 @@
+--- a/playbook/__init__.py	2017-11-30 05:08:36.000000000 +0800
++++ b/playbook/__init__.py	2017-12-29 15:39:08.082340948 +0800
+@@ -47,6 +47,7 @@
+         self._basedir = to_text(os.getcwd(), errors='surrogate_or_strict')
+         self._loader = loader
+         self._file_name = None
++        self._external_task_id = ''
+ 
+     @staticmethod
+     def load(file_name, variable_manager=None, loader=None):
+@@ -93,6 +94,9 @@
+                 self._loader.set_basedir(cur_basedir)
+                 raise AnsibleParserError("playbook entries must be either a valid play or an include statement", obj=entry)
+ 
++            if 'external_task_id' in entry.keys():
++               self._external_task_id = entry.pop('external_task_id')
++
+             if any(action in entry for action in ('import_playbook', 'include')):
+                 if 'include' in entry:
+                     display.deprecated("'include' for playbook includes. You should use 'import_playbook' instead", version="2.8")

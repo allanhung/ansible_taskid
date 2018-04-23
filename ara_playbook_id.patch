@@ -1,0 +1,27 @@
+--- a/plugins/callbacks/log_ara.py	2017-12-29 15:52:45.737329837 +0800
++++ b/plugins/callbacks/log_ara.py	2017-12-29 15:56:29.820326792 +0800
+@@ -313,11 +313,19 @@
+                 options[parameter] = msg
+ 
+         LOG.debug('starting playbook %s', path)
+-        self.playbook = models.Playbook(
+-            ansible_version=ansible_version,
+-            path=path,
+-            options=options
+-        )
++        if playbook._external_task_id:
++            self.playbook = models.Playbook(
++                id=playbook._external_task_id,
++                ansible_version=ansible_version,
++                path=path,
++                options=options
++            )
++        else:
++            self.playbook = models.Playbook(
++                ansible_version=ansible_version,
++                path=path,
++                options=options
++            )
+ 
+         self.playbook.start()
+         db.session.add(self.playbook)
