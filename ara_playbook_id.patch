@@ -1,6 +1,6 @@
---- a/plugins/callbacks/log_ara.py	2017-12-29 15:52:45.737329837 +0800
-+++ b/plugins/callbacks/log_ara.py	2017-12-29 15:56:29.820326792 +0800
-@@ -313,11 +313,19 @@
+--- a/plugins/callbacks/log_ara.py	2018-04-24 10:22:54.250288191 +0800
++++ b/plugins/callbacks/log_ara.py	2018-04-24 10:23:21.585287820 +0800
+@@ -320,11 +320,19 @@
                  options[parameter] = msg
  
          LOG.debug('starting playbook %s', path)
