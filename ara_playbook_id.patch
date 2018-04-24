@@ -25,3 +25,15 @@
  
          self.playbook.start()
          db.session.add(self.playbook)
+--- a/shell.py       2018-04-24 10:08:53.411299617 +0800
++++ b/shell.py       2018-04-24 10:08:40.414299794 +0800
+@@ -61,7 +61,8 @@
+         if err:
+             self.LOG.debug('got an error: %s', err)
+ 
+-        self.ara_context.pop()
++        if not current_app:
++            self.ara_context.pop()
+ 
+ 
+ def main(argv=sys.argv[1:]):
